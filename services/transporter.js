@@ -12,36 +12,33 @@ const transporter = createTransport({
     }
 })
 
-//  const sendEmail = async ({to, subject,html}) => {
-//     try{
-//         await transporter.sendMail({
-//             from:`"" <${process.env.APP_EMAIL}>`,
-//             to,
-//             subject,
-//             html
-//         });
-//         console.log('Email sent successfully to ${to}');
+const sendEmail = async ({to, subject,html}) => {
 
-//     }catch(error){
-//         console.error('Error sending email:', error);
-//         throw new Error('Email not sent');
+        try{
+            await transporter.sendMail({
+                from:`"" <${process.env.APP_EMAIL}>`,
+                to,
+                subject,
+                html
+            });
+            console.log('Email sent successfully to ${to}');
+        }catch(error){
+            console.error('Error sending email:', error);
+            throw new Error('Email not sent');
+        }
+    }
+     transporter.verify((error, success) => {
+        if(error){
+            console.log(error);
+        }
+        else{
+            console.log("Server is ready to take messages");
+        }
+        if (success){
+            console.log(success)
+        }
+    })
 
-// }
-    
-//     }
-
-// transporter.verify((error, success) => {
-//     if(error){
-//         console.log(error);
-//     }
-//     else{
-//         console.log("Server is ready to take messages");
-// }
-// if (success){
-//     console.log(success)
-// }
-
-// })
 
 module.exports = {
     sendEmail,
