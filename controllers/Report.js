@@ -2,6 +2,8 @@ const Report = require('../models/Report');
 const Shareholder = require('../models/Shareholder');
 const nodemailer = require('nodemailer');
 
+
+
 exports.uploadReport = async (req, res) => {
     try {
         const { title, description } = req.body;
@@ -18,7 +20,7 @@ exports.uploadReport = async (req, res) => {
         // 3. Setup Email Transporter (Use your real credentials here)
         const transporter = nodemailer.createTransport({
             service: 'gmail',
-            auth: { user: 'admin@email.com', pass: 'your-app-password' }
+            auth: { user:process.env.APP_EMAIL, pass: process.env.APP_PASSWORD }
         });
 
         // 4. Send Emails (Logic for multiple recipients)

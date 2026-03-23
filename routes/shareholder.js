@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const shareCtrl = require('../controllers/Shareholder');
+const addShareHolders = require('../controllers/Shareholder');
 
 
 // PATH: /api/shareholders
 
-router.post('/add', shareCtrl.addShareholder);
-router.get('/all', shareCtrl.getAllShareholders);
+router.route('/add').post(addShareHolders.addShareholder);
+
+router.route('/all').get(addShareHolders.getAllShareholders);
+
+
 
 module.exports = router;

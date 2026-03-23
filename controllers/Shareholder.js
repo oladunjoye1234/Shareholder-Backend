@@ -1,5 +1,6 @@
 const Shareholder = require('../models/Shareholder');
 
+
 // Add a new shareholder
 exports.addShareholder = async (req, res) => {
     try {

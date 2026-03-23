@@ -5,11 +5,21 @@ const connectDB = require('./config/connectToDb');
 const Shareholder = require('./models/Shareholder');
 const Report = require('./models/Report');
 
+const path = require('path');
+require('dotenv').config();
+
 const app = express();
 connectDB(); // Initialize MongoDB Connection
 
 app.use(cors());
 app.use(express.json());
+
+const ShareHolderRoutes = require('./routes/shareholder');
+const ReportRoutes = require('./routes/Reports');
+
+
+app.use('/api/shareholders', ShareHolderRoutes);
+app.use('/api/reports', ReportRoutes);
 
 // ... (Keep your multer and transporter config from before) ...
 
