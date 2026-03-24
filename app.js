@@ -44,10 +44,4 @@ app.post('/upload-report', upload.single('file'), async (req, res) => {
     }
 });
 
-// ROUTE: Get All Reports
-app.get('/reports', async (req, res) => {
-    const reports = await Report.find().sort({ created_at: -1 });
-    res.json(reports);
-});
-
 app.listen(5000, () => console.log('Server running on port 5000'));

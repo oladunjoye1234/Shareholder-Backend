@@ -40,3 +40,34 @@ exports.uploadReport = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+exports.getReports = async (req, res) => {
+    try {   
+        const reports = await Report.find().sort({ created_at: -1 });
+        res.json(reports);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.downloadReport = async (req, res) => {
+    try {
+        const reportId = req.params.id;
+        const report = await Report.findById(reportId);
+        if (!report) return res.status(404).json({ error: 'Report not found' });
+        res.download(`./uploads/${report.file_url}`, report.file_url);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }   
+};
+
+exports.deleteReport = async (req, res) => {
+    try {
+        const reportId = req.params.id;
+        const report = await Report.findByIdAndDelete(reportId);
+        if (!report) return res.status(404).json({ error: 'Report not found' });
+        res.json({ message: 'Report deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
